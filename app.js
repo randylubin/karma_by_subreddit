@@ -58,7 +58,7 @@ app.get('/user/:username', function(req, res) {
 		}).addListener("end", function() {
 			console.log("all finished here");
 			userinfo = JSON.parse(userinfo)
-			//console.log(userinfo.data.children);
+			//console.log(userinfo);
 			res.render('user_karma.jade',
 				{ locals: {
 					title: username,
