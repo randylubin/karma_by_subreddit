@@ -64,19 +64,27 @@ app.get('/user/:username', function(req, res) {
 		}).addListener("end", function() {
 			console.log("all finished here");
 			userinfo = JSON.parse(userinfo)
-			//console.log(userinfo.data.children);
-			res.render('user_karma.jade',
-				{ locals: {
-					title: username,
-					info: userinfo.data
-				}
-			});
+			//console.log(userinfo);
+			if(!userinfo.data.after){
+				res.render('user_karma.jade',
+					{ locals: {
+						title: username,
+						info: userinfo.data
+					}
+				});
+			}else{
+				
+				res.render('user_karma.jade',
+					{ locals: {
+						title: username,
+						info: userinfo.data
+					}
+				});
+			}
 		})
 	});
 
 	req.end();
-
-
 	
 });
 
