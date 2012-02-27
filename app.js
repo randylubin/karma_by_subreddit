@@ -29,6 +29,12 @@ app.configure('production', function(){
 
 // Routes
 
+app.get('/', function(req, res) {
+		res.render('index', {
+			title: 'Are you a Karma whore?'
+		});
+});
+
 app.get('/user/:username', function(req, res) {
 	
 	var username = req.params.username;
