@@ -33,6 +33,8 @@ app.get('/user/:username', function(req, res) {
 	
 	var username = req.params.username;
 	var userinfo;
+	var count = 0;
+	var after;
 
 	var options = {
 		host: 'www.reddit.com',
@@ -68,12 +70,6 @@ app.get('/user/:username', function(req, res) {
 				});
 			}else{
 				
-				res.render('user_karma.jade',
-					{ locals: {
-						title: username,
-						info: userinfo.data
-					}
-				});
 			}
 		})
 	});
