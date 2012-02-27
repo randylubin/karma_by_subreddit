@@ -1,4 +1,6 @@
 h1 karma!
 
+- var subreddits = {}
 - for child in info.children
-	p= child.data.title + ' and votes: ' + (child.data.ups - child.data.downs)
+	- var votes = (child.data.ups - child.data.downs)
+	p= child.data.title + ' and votes: ' + votes
