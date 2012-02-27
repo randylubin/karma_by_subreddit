@@ -1,0 +1,13 @@
+Karma By Subreddit
+
+Authors:
+
+Randy Lubin
+Chris Maury
+
+Installation:
+
+To build, navigate to the main folder and run:
+npm install -d
+
+It will then be running on localhost:4000
