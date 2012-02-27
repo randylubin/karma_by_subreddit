@@ -3,4 +3,14 @@ h1 karma!
 - var subreddits = {}
 - for child in info.children
 	- var votes = (child.data.ups - child.data.downs)
-	p= child.data.title + ' and votes: ' + votes
+	//p= child.data.title + ' and votes: ' + votes
+	- if (subreddits[child.data.subreddit])
+		- subreddits[child.data.subreddit] += votes
+	- else
+		- subreddits[child.data.subreddit] = votes
+
+//- console.log(subreddits)
+each votes, subreddit in subreddits
+	p= subreddit + ' has ' + votes + ' votes'
+	
+	
