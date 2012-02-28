@@ -94,7 +94,7 @@ app.get('/user/:username', function(req, res) {
 		req.end();
 	}
 
-	bigloop(count, after)
+	bigloop(count, after);
 });
 
 app.listen(4000);
