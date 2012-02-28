@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+div.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override this later */
+    background-color: teal;
+    margin-right: 2px;
+}
+
+div#viz{
+	width: 300px;
+	height: 200px;
+}
