@@ -35,6 +35,11 @@ app.get('/', function(req, res) {
 		});
 });
 
+app.post('/user/',function(req, res, next) {
+	 var username = req.body.username;
+  	 res.redirect('/user/' + username);
+});
+
 app.get('/user/:username', function(req, res) {
 	
 	var username = req.params.username;
