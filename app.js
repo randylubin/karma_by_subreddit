@@ -86,20 +86,24 @@ app.get('/user/:username', function(req, res) {
 			}).addListener("end", function() {
 				console.log("all finished here");
 				newpage = JSON.parse(newpage)
-				userinfo = userinfo.concat(newpage.data.children);
-				//console.log(userinfo);
-				if(!newpage.data.after || count >= (maxChildren - 25)){
-					res.render('user_karma.jade',
-						{ locals: {
-							title: username,
-							info: userinfo
-						}
-					});
+				if(newpage.data.children){
+					userinfo = userinfo.concat(newpage.data.children);
+					//console.log(userinfo);
+					if(!newpage.data.after || count >= (maxChildren - 25)){
+						res.render('user_karma.jade',
+							{ locals: {
+								title: username,
+								info: userinfo
+							}
+						});
+					}else{
+						count += 25;
+						after = newpage.data.after;
+						newpage = 0;
+						bigloop(count, after);
+					}
 				}else{
-					count += 25;
-					after = newpage.data.after;
-					newpage = 0;
-					bigloop(count, after);
+					res.redirect('/error/');
 				}
 			})
 		});
