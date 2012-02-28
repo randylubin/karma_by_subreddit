@@ -1,6 +1,10 @@
 h1 karma!
 
 - var subreddits = {}
+- var links = 0
+- var linkVotes = 0
+- var comments = 0
+- var commentVotes = 0
 - for child in info
 	- var votes = (child.data.ups - child.data.downs)
 	//p= child.data.title + ' and votes: ' + votes
@@ -8,6 +12,15 @@ h1 karma!
 		- subreddits[child.data.subreddit] += votes
 	- else
 		- subreddits[child.data.subreddit] = votes
+	- if (child.kind == 't3')
+		- links += 1
+		- linkVotes += votes
+	- else
+		- comments += 1
+		- commentVotes += votes
+
+h3 Total Links: #{links} with #{linkVotes} votes
+h3 Total Comments: #{comments} with #{commentVotes} votes
 
 each votes, subreddit in subreddits
 	p= subreddit + ' has ' + votes + ' votes'
