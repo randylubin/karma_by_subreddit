@@ -42,6 +42,8 @@ app.post('/user/',function(req, res, next) {
 
 app.get('/user/:username', function(req, res) {
 	
+
+	var maxChildren = 100; //limits number of api requests (25/request)
 	var username = req.params.username;
 	var userinfo = [];
 	var newpage = 0;
@@ -80,7 +82,7 @@ app.get('/user/:username', function(req, res) {
 				newpage = JSON.parse(newpage)
 				userinfo = userinfo.concat(newpage.data.children);
 				//console.log(userinfo);
-				if(!newpage.data.after){
+				if(!newpage.data.after || count >= (maxChildren - 25)){
 					res.render('user_karma.jade',
 						{ locals: {
 							title: username,
