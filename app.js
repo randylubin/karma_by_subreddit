@@ -35,7 +35,13 @@ app.get('/', function(req, res) {
 		});
 });
 
-app.post('/user/',function(req, res, next) {
+app.get('/test', function(req, res) {
+		res.render('test', {
+			title: 'Are you a Karma whore?'
+		});
+});
+
+app.post('/user/',function(req, res) {
 	 var username = req.body.username;
   	 res.redirect('/user/' + username);
 });
