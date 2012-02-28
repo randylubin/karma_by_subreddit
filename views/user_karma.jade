@@ -1,3 +1,8 @@
+head
+	script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+	script(type='text/javascript', src='/js/highcharts.js')
+	script(type='text/javascript', src='/js/resultschart.js')
+
 h1 karma!
 
 - var subreddits = {}
@@ -21,6 +26,8 @@ h1 karma!
 
 h3 Total Links: #{links} with #{linkVotes} votes
 h3 Total Comments: #{comments} with #{commentVotes} votes
+
+#container
 
 each votes, subreddit in subreddits
 	p= subreddit + ' has ' + votes + ' votes'
