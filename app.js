@@ -38,54 +38,63 @@ app.get('/', function(req, res) {
 app.get('/user/:username', function(req, res) {
 	
 	var username = req.params.username;
-	var userinfo;
-
-	var options = {
-		host: 'www.reddit.com',
-		port: 80,
-		path: '/user/' + username + '.json',
-		method: 'GET'
-	};
-	console.log(options)
-
-	var req = http.request(options, function(resp) {
-		//console.log('STATUS: ' + resp.statusCode);
-		//console.log('HEADERS: ' + JSON.stringify(resp.headers));
-		resp.setEncoding('utf8');
+	var userinfo = [];
+	var newpage = 0;
+	var count = 0;
+	var after;
+	console.log("check1")
+	var bigloop = function(count, after){
 		
-		resp.on('data', function (chunk) {
-			//console.log('BODY: ' + chunk);
-			if (userinfo == undefined) {
-				userinfo = chunk;
-			}
-			else{
-				userinfo += chunk;	
-			};
-		}).addListener("end", function() {
-			console.log("all finished here");
-			userinfo = JSON.parse(userinfo)
-			//console.log(userinfo);
-			if(!userinfo.data.after){
-				res.render('user_karma.jade',
-					{ locals: {
-						title: username,
-						info: userinfo.data
-					}
-				});
-			}else{
-				
-				res.render('user_karma.jade',
-					{ locals: {
-						title: username,
-						info: userinfo.data
-					}
-				});
-			}
-		})
-	});
+		//set params
+		if (count != 0){var params = "?count=" + count + "&after=" + after;}else{params = ""}
+		
 
-	req.end();
-	
+		var options = {
+			host: 'www.reddit.com',
+			port: 80,
+			path: '/user/' + username + '.json' + params,
+			method: 'GET'
+		};
+		console.log(options)
+
+		var req = http.request(options, function(resp) {
+			//console.log('STATUS: ' + resp.statusCode);
+			//console.log('HEADERS: ' + JSON.stringify(resp.headers));
+			resp.setEncoding('utf8');
+			
+			resp.on('data', function (chunk) {
+				//console.log('BODY: ' + chunk);
+				if (newpage == 0) {
+					newpage = chunk;
+				}
+				else{
+					newpage += chunk;	
+				};
+			}).addListener("end", function() {
+				console.log("all finished here");
+				newpage = JSON.parse(newpage)
+				userinfo = userinfo.concat(newpage.data.children);
+				//console.log(userinfo);
+				if(!newpage.data.after){
+					res.render('user_karma.jade',
+						{ locals: {
+							title: username,
+							info: userinfo
+						}
+					});
+				}else{
+					count += 25;
+					after = newpage.data.after;
+					newpage = 0;
+					bigloop(count, after);
+				}
+			})
+		});
+
+		req.end();
+	}
+
+	bigloop(count, after)
 });
 
 app.listen(4000);
