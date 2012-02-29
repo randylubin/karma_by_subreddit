@@ -1,5 +1,5 @@
 $(document).ready(function() { 
-	var dataset = subreddits;
+	var dataset= [1,2,4,5,6];
 	console.log(d3.keys(dataset))
 	d3.select("#viz").selectAll("div")
     .data(dataset)
