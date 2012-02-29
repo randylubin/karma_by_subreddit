@@ -55,6 +55,7 @@ app.get('/user/:username', function(req, res) {
 	karmaCalculator.getObj(req.params.username, function(error, username, userinfoObject, info){
 		if(error){
 			res.redirect('/error/')
+			return;
 		}else{
 			res.expose(userinfoObject)
 			res.render('user_karma.jade',
@@ -63,6 +64,7 @@ app.get('/user/:username', function(req, res) {
 					info: info
 				}				
 			});
+			return;
 		}
 	});
 });

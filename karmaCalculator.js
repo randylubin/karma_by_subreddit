@@ -1,68 +1,74 @@
 var http = require('http')
+var maxChildren = 100; //limits number of api requests (25/request)
+
 
 KarmaCalculator = function(){};
 
 KarmaCalculator.prototype.getObj = function(username, callback){
-	var maxChildren = 100; //limits number of api requests (25/request)
 	var userinfo = [];
 	var newpage = 0;
 	var count = 0;
 	var after;
 
-	bigloop = function(count, after){
-		
-		//set params
-		if (count != 0){var params = "?count=" + count + "&after=" + after;}else{params = ""}
-		
-
-		var options = {
-			host: 'www.reddit.com',
-			port: 80,
-			path: '/user/' + username + '.json' + params,
-			method: 'GET'
-		};
-		console.log(options)
-
-		var req = http.request(options, function(resp) {
-			console.log('STATUS: ' + resp.statusCode);
-			//console.log('HEADERS: ' + JSON.stringify(resp.headers));
-			resp.setEncoding('utf8');
-			
-			resp.on('data', function (chunk) {
-				//console.log('BODY: ' + chunk);
-				if (newpage == 0) {
-					newpage = chunk;
-				}
-				else{
-					newpage += chunk;	
-				};
-			}).addListener("end", function() {
-				console.log("all finished here");
-				newpage = JSON.parse(newpage)
-				if(newpage.data){
-					userinfo = userinfo.concat(newpage.data.children);
-					//console.log(userinfo);
-					if(!newpage.data.after || count >= (maxChildren - 25)){
-						karmaObj = transformKarma(userinfo);
-						callback(null, username, karmaObj, userinfo);
-					}else{
-						count += 25;
-						after = newpage.data.after;
-						newpage = 0;
-						bigloop(count, after);
-					}
-				}else{
-					error = 'username does not exist'
-					callback(error)
-				}
-			})
-		});
-
-		req.end();
-	}
-
-	bigloop(count, after);
+	bigloop(count, after, username, userinfo, newpage, callback);
+	return;
 }
+
+function bigloop(count, after, username, userinfo, newpage, callback){
+		
+	//set params
+	if (count != 0){var params = "?count=" + count + "&after=" + after;}else{params = ""}
+	
+
+	var options = {
+		host: 'www.reddit.com',
+		port: 80,
+		path: '/user/' + username + '.json' + params,
+		method: 'GET'
+	};
+	console.log(options)
+
+	var req = http.request(options, function(resp) {
+		//console.log('STATUS: ' + resp.statusCode);
+		//console.log('HEADERS: ' + JSON.stringify(resp.headers));
+		resp.setEncoding('utf8');
+		
+		resp.on('data', function (chunk) {
+			//console.log('BODY: ' + chunk);
+			if (newpage == 0) {
+				newpage = chunk;
+			}
+			else{
+				newpage += chunk;	
+			};
+		}).addListener("end", function() {
+			console.log("all finished here");
+			newpage = JSON.parse(newpage)
+			if(newpage.data){
+				userinfo = userinfo.concat(newpage.data.children);
+				//console.log(userinfo);
+				if(!newpage.data.after || count >= (maxChildren - 25)){
+					karmaObj = transformKarma(userinfo);
+					callback(null, username, karmaObj, userinfo);
+					return;
+				}else{
+					count += 25;
+					after = newpage.data.after;
+					newpage = 0;
+					bigloop(count, after, username, userinfo, newpage, callback);
+					return;
+				}
+			}else{
+				error = 'username does not exist'
+				callback(error)
+				return;
+			}
+		})
+	});
+
+	req.end();
+}
+
 
 function transformKarma(userinfo){
 	var subreddits = {};
