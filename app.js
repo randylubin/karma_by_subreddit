@@ -86,7 +86,7 @@ app.get('/user/:username', function(req, res) {
 			}).addListener("end", function() {
 				console.log("all finished here");
 				newpage = JSON.parse(newpage)
-				if(newpage.data.children){
+				if(newpage.data){
 					userinfo = userinfo.concat(newpage.data.children);
 					//console.log(userinfo);
 					if(!newpage.data.after || count >= (maxChildren - 25)){

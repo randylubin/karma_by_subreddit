@@ -1,6 +1,7 @@
 h1 karma!
 
 div#viz
+div#chart
 
 div
 	- var subreddits = {}
@@ -23,8 +24,9 @@ div
 
 	h3 Total Links: #{links} with #{linkVotes} votes
 	h3 Total Comments: #{comments} with #{commentVotes} votes
-
+	-console.log(subreddits);
+	script
+		runJSON(subreddits);
 	each votes, subreddit in subreddits
 		p= subreddit + ' has ' + votes + ' votes'
-		
 		
