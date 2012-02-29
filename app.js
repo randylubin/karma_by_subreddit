@@ -52,13 +52,19 @@ app.post('/user/',function(req, res) {
 
 app.get('/user/:username', function(req, res) {
 	karmaCalculator.getObj(req.params.username, function(error, username, userinfoObject, info){
-		res.expose(userinfoObject)
-		res.render('user_karma.jade',
-			{ locals: {
-				title: username,
-				info: info
-			}				
-		});
+		if(error){
+			res.redirect('/error/')
+			return;
+		}else{
+			res.expose(userinfoObject)
+			res.render('user_karma.jade',
+				{ locals: {
+					title: username,
+					info: info
+				}				
+			});
+			return;
+		}
 	});
 });
 
