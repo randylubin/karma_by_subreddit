@@ -52,6 +52,7 @@ KarmaCalculator.prototype.getObj = function(username, callback){
 						bigloop(count, after);
 					}
 				}else{
+					error = 'username does not exist'
 					callback(error)
 				}
 			})
