@@ -4,10 +4,13 @@
  */
 
 var express = require('express')
+  , expose = require('express-expose')
   , routes = require('./routes')
 
+var KarmaProvider = require('./karmaCalculator').KarmaCalculator;
+
 var app = module.exports = express.createServer();
-var http = require('http')
+
 // Configuration
 
 app.configure(function(){
@@ -28,6 +31,7 @@ app.configure('production', function(){
 });
 
 // Routes
+var karmaCalculator = new KarmaCalculator;
 
 app.get('/', function(req, res) {
 		res.render('index', {
@@ -36,6 +40,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/test', function(req, res) {
+		res.expose('karmaObj = 	{		"children": [		   			{"name": "AgglomerativeCluster", "size": 3938},			{"name": "CommunityStructure", "size": 3812},			{"name": "HierarchicalCluster", "size": 6714},			{"name": "MergeEdge", "size": 743}		]	}')
 		res.render('test', {
 			title: 'Are you a Karma whore?'
 		});
@@ -47,72 +52,17 @@ app.post('/user/',function(req, res) {
 });
 
 app.get('/user/:username', function(req, res) {
-	
-
-	var maxChildren = 100; //limits number of api requests (25/request)
-	var username = req.params.username;
-	var userinfo = [];
-	var newpage = 0;
-	var count = 0;
-	var after;
-	console.log("check1")
-	var bigloop = function(count, after){
-		
-		//set params
-		if (count != 0){var params = "?count=" + count + "&after=" + after;}else{params = ""}
-		
-
-		var options = {
-			host: 'www.reddit.com',
-			port: 80,
-			path: '/user/' + username + '.json' + params,
-			method: 'GET'
-		};
-		console.log(options)
-
-		var req = http.request(options, function(resp) {
-			//console.log('STATUS: ' + resp.statusCode);
-			//console.log('HEADERS: ' + JSON.stringify(resp.headers));
-			resp.setEncoding('utf8');
-			
-			resp.on('data', function (chunk) {
-				//console.log('BODY: ' + chunk);
-				if (newpage == 0) {
-					newpage = chunk;
-				}
-				else{
-					newpage += chunk;	
-				};
-			}).addListener("end", function() {
-				console.log("all finished here");
-				newpage = JSON.parse(newpage)
-				if(newpage.data){
-					userinfo = userinfo.concat(newpage.data.children);
-					//console.log(userinfo);
-					if(!newpage.data.after || count >= (maxChildren - 25)){
-						res.render('user_karma.jade',
-							{ locals: {
-								title: username,
-								info: userinfo
-							}
-						});
-					}else{
-						count += 25;
-						after = newpage.data.after;
-						newpage = 0;
-						bigloop(count, after);
-					}
-				}else{
-					res.redirect('/error/');
-				}
-			})
+	karmaCalculator.getObj(req.params.username, function(error, username, userinfoObject, info){
+		res.expose(userinfoObject)
+		res.render('user_karma.jade',
+			{ locals: {
+				title: username,
+				info: info
+			}				
 		});
-
-		req.end();
-	}
-
-	bigloop(count, after);
+	});
 });
+
 
 app.listen(4000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -28,7 +28,7 @@ $(document).ready(function() {
 		}
 	*/
  	//bubble chart
-/*
+
 	var r = 960,
 	    format = d3.format(",d"),
 	    fill = d3.scale.category20c();
@@ -78,6 +78,7 @@ $(document).ready(function() {
 	  recurse(null, root);
 	  return {children: classes};
 	}
-	*/
+	runJSON(karmaObj);
+
 });
 
