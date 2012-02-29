@@ -2,5 +2,65 @@
 #chart
 script
 	var dataset = [ 20, 10, 15, 20, 25 ];
+	var userinfoObject = 
+	{
+		"children": [		   
+			{"name": "AgglomerativeCluster", "size": 3938},
+			{"name": "CommunityStructure", "size": 3812},
+			{"name": "HierarchicalCluster", "size": 6714},
+			{"name": "MergeEdge", "size": 743}
+		]
+	}
+
+		var r = 960,
+			format = d3.format(",d"),
+			fill = d3.scale.category20c();
+
+		var bubble = d3.layout.pack()
+			.sort(null)
+			.size([r, r]);
+
+		var vis = d3.select("#chart").append("svg")
+			.attr("width", r)
+			.attr("height", r)
+			.attr("class", "bubble");
+
+		var runJSON = function(userinfoObject) {
+			console.log("running");
+			var node = vis.selectAll("g.node")
+			.data(bubble.nodes(classes(userinfoObject))
+			.filter(function(d) { return !d.children; }))
+			.enter().append("g")
+			.attr("class", "node")
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+		node.append("title")
+			.text(function(d) { return d.className + ": " + format(d.value); });
+
+		node.append("circle")
+			.attr("r", function(d) { return d.r; })
+			.style("fill", function(d) { return fill(d.packageName); });
+
+		node.append("text")
+			.attr("text-anchor", "middle")
+			.attr("dy", ".3em")
+			.text(function(d) { return d.className.substring(0, d.r / 3); });
+		};
+
+		// Returns a flattened hierarchy containing all leaf nodes under the root.
+		function classes(root) {
+			var classes = [];
+
+			function recurse(name, node) {
+				if (node.children){
+					node.children.forEach(function(child) { recurse(node.name, child); });
+				}
+				else classes.push({packageName: name, className: node.name, value: node.size});
+				}
+
+				recurse(null, root);
+				return {children: classes};
+		}
+		$(document).ready(function() {runJSON(userinfoObject);});
 //-a(href="https://twitter.com/share" data-text="Sweet graph of my Reddit Karma:" data-size="large" data-count="none").twitter-share-button Tweet
 //-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
