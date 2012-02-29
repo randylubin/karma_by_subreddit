@@ -2,9 +2,35 @@
 html
 	head
 		title= title
-		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
 		script(type='text/javascript', src='/js/d3/d3.v2.min.js')
 		script(type='text/javascript', src='/js/bubblechart.js')
-		script(type='text/javascript', src='/js/subreddits.js')
-	body!= body
+		script(type='text/javascript', src='/js/bootstrap.min.js')
+	header
+			.navbar.navbar-fixed-top
+				.navbar-inner
+					.container
+							ul.nav
+								a.brand(href='/') KarmaWhoring
+								li: a(href='/') home 
+								li.divider-vertical
+								li: a(href='/about/') about
+		
+	.brick
+	.row-fluid
+		.span12
+			.page-header.center
+				h1=title
+.row-fluid
+	.span12						
+		body!= body
+	.row-fluid
+		.span12.center
+			small created by 
+			a(href='http://randylubin.com') Randy
+			\ and 
+			a(href='http://chrismaury.com') Chris
+			\.	
+
+			

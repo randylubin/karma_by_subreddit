@@ -1,35 +1,5 @@
 $(document).ready(function() { 
-	var dataset= [1,2,4,5,6];
-	console.log(d3.keys(dataset))
-	d3.select("#viz").selectAll("div")
-    .data(dataset)
-    .enter()
-    .append("div")
-    .attr("class", "bar")
- 	.style("height", function(d) {
-    	var barHeight = d * 5;  //Scale up by factor of 5
-    	return barHeight + "px";
-	});
-
- 	//bubble data
-	/*var userinfoObject = 
-		{
-			"children": [
-			
-			   
-			      {"name": "AgglomerativeCluster", "size": 3938},
-			      {"name": "CommunityStructure", "size": 3812},
-			      {"name": "HierarchicalCluster", "size": 6714},
-			      {"name": "MergeEdge", "size": 743}
-			     
-			    
-				
-			]
-		}
-	*/
- 	//bubble chart
-
-	var r = 960,
+	var r = 480,
 	    format = d3.format(",d"),
 	    fill = d3.scale.category20c();
 

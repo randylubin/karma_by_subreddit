@@ -35,14 +35,13 @@ var karmaCalculator = new KarmaCalculator;
 
 app.get('/', function(req, res) {
 		res.render('index', {
-			title: 'Are you a Karma whore?'
+			title: 'Where does your Karma come from?'
 		});
 });
 
-app.get('/test', function(req, res) {
-		res.expose('karmaObj = 	{		"children": [		   			{"name": "AgglomerativeCluster", "size": 3938},			{"name": "CommunityStructure", "size": 3812},			{"name": "HierarchicalCluster", "size": 6714},			{"name": "MergeEdge", "size": 743}		]	}')
-		res.render('test', {
-			title: 'Are you a Karma whore?'
+app.get('/about', function(req, res) {
+		res.render('about', {
+			title: 'About Karma Whoring'
 		});
 });
 

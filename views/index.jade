@@ -1,11 +1,7 @@
-h1= title
-
-p Enter your username to find out where your karma comes from!
-	
-div
-	form( method="post", action="/user/")
-		div
+.row-fluid.span4.aligncenter4
+	.span4.center.well
+		form(method="post", action="/user/")
+			label Find out where your Karma comes from.
+			input(class="span3", type="text", name="username", id="username", placeholder="Enter Reddit username...")
 			div
-				input(type="text", name="username", id="username")
-			div
-				input(type="submit", value="Submit")
+				input(class="btn-primary", type="submit", value="Submit")
