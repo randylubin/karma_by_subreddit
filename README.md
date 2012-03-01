@@ -4,8 +4,8 @@ Karma By Subreddit
 Authors
 -------
 
-[Randy Lubin](http://randylubin.com)
-[Chris Maury](www.chrismaury.com)
+-[Randy Lubin](http://randylubin.com)
+-[Chris Maury](www.chrismaury.com)
 
 Installation:
 ---------
