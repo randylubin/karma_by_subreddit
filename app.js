@@ -45,6 +45,12 @@ app.get('/about', function(req, res) {
 		});
 });
 
+app.get('/error', function(req, res) {
+		res.render('index', {
+			title: 'Oops, try again.'
+		});
+});
+
 app.post('/user/',function(req, res) {
 	 var username = req.body.username;
   	 res.redirect('/user/' + username);
@@ -58,7 +64,7 @@ app.get('/user/:username', function(req, res) {
 			res.expose(userinfoObject)
 			res.render('user_karma.jade',
 				{ locals: {
-					title: username,
+					title: 'Results for ' + username,
 					info: info
 				}				
 			});
