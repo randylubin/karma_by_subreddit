@@ -5,7 +5,7 @@ Authors
 -------
 
 - [Randy Lubin](http://randylubin.com)
-- [Chris Maury](www.chrismaury.com)
+- [Chris Maury](http://www.chrismaury.com)
 
 Installation:
 ---------
