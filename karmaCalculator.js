@@ -1,5 +1,5 @@
 var http = require('http')
-var maxChildren = 500; //limits number of api requests (25/request)
+var maxChildren = 100; //limits number of api requests (25/request)
 
 
 KarmaCalculator = function(){};

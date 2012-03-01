@@ -47,13 +47,26 @@ app.get('/about', function(req, res) {
 
 app.get('/error', function(req, res) {
 		res.render('index', {
-			title: 'Oops, try again.'
+			title: 'Where does your Karma come from?',
+			error: 'Error connecting to Reddit. Please try again.'
+		});
+});
+
+app.get('/user/error', function(req, res) {
+		res.render('index', {
+			title: 'Where does your Karma come from?',
+			error: 'Please enter a valid Reddit username.'
 		});
 });
 
 app.post('/user/',function(req, res) {
-	 var username = req.body.username;
-  	 res.redirect('/user/' + username);
+	if(req.get('/user/')){
+		res.redirect('/user/error/')
+	}else{
+		var username = req.body.username;
+  	 	res.redirect('/user/' + username);
+	}
+	 
 });
 
 app.get('/user/:username', function(req, res) {

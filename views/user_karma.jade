@@ -22,10 +22,7 @@ div
 	- var sorted = []
 	- for (var subreddit in subreddits)
 		- sorted.push([subreddit, subreddits[subreddit]])
-	- sorted = sorted.sort(function(a,b){return b[1]-a[1]})	
-	//- for child in subreddits
-	- console.log(subreddits)	
-		
+	- sorted = sorted.sort(function(a,b){return b[1]-a[1]})				
 			
 	each votes, subreddit in subreddits
 		- userinfoObject.children.push({"name":subreddit,"size":votes})
@@ -34,13 +31,23 @@ div
 
 .container-fluid
 	.row-fluid.span12
-		.span4.well
+		.span4.well.tall
 			.totals
-				h5 #{links} Links with #{linkVotes} votes
-				h5 #{comments} Links with #{commentVotes} votes
+				h5 #{links} 
+					span Links with 
+					#{linkVotes} 
+					span votes
+					br
+					#{comments} 
+					span Links with 
+					#{commentVotes}
+					span votes
 				br
 			.subreddits
 				each subreddit in sorted
-					h5= subreddit[0] + ' has '+ subreddit[1] + ' votes'	  
+					h5 #{subreddit[0]} 
+						span  has 
+						#{subreddit[1]}
+						span  votes	  
 		.span6.center.well
 			#chart

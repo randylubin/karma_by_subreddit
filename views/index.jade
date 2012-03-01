@@ -1,5 +1,8 @@
 .row-fluid.span4.aligncenter4
 	.span4.center.well
+		.alert.alert-error
+			.a(data-dismiss='alert').close
+			#{error}	
 		form(method="post", action="/user/")
 			label Find out where your Karma comes from.
 			input(class="span3", type="text", name="username", id="username", placeholder="Enter Reddit username...")
