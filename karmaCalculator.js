@@ -1,6 +1,10 @@
 var http = require('http')
 var maxChildren = 100; //limits number of api requests (25/request)
+<<<<<<< HEAD
 
+=======
+var error;
+>>>>>>> e6c2a89bbd5264fb9e39c2c082a17f4dd5b299be
 
 KarmaCalculator = function(){};
 
@@ -29,6 +33,10 @@ function bigloop(count, after, username, userinfo, newpage, callback){
 	console.log(options)
 
 	var req = http.request(options, function(resp) {
+		req.on('error', function(error) {
+  			callback()
+		});
+
 		//console.log('STATUS: ' + resp.statusCode);
 		//console.log('HEADERS: ' + JSON.stringify(resp.headers));
 		resp.setEncoding('utf8');
@@ -83,7 +91,6 @@ function transformKarma(userinfo){
 		var ups = child.data.ups || 0;
 		var downs = child.data.downs || 0;
 		var votes = (ups-downs);
-		if (votes<=0) votes = .1;
 		if (subreddits[child.data.subreddit]){
 			subreddits[child.data.subreddit] += votes;
 		}else{
@@ -101,7 +108,7 @@ function transformKarma(userinfo){
 	}
 	
 	for (subreddit in subreddits){
-		karmaObj.children.push({"name":subreddit,"size":subreddits[subreddit]})
+		if(subreddits[subreddit]>0)	karmaObj.children.push({"name":subreddit,"size":subreddits[subreddit]});
 	}
 	var tempString = JSON.stringify(karmaObj);
 	karmaObj = 'var karmaObj = ' + tempString;
