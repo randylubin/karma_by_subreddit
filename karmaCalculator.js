@@ -1,6 +1,6 @@
 var http = require('http')
-var maxChildren = 500; //limits number of api requests (25/request)
-
+var maxChildren = 100; //limits number of api requests (25/request)
+var error;
 
 KarmaCalculator = function(){};
 
@@ -29,6 +29,10 @@ function bigloop(count, after, username, userinfo, newpage, callback){
 	console.log(options)
 
 	var req = http.request(options, function(resp) {
+		req.on('error', function(error) {
+  			callback(error)
+		});
+
 		//console.log('STATUS: ' + resp.statusCode);
 		//console.log('HEADERS: ' + JSON.stringify(resp.headers));
 		resp.setEncoding('utf8');
