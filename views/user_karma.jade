@@ -29,7 +29,11 @@ div
 	
 	
 
-.container-fluid
+.container-fluid.center
+	.row-fluid
+	.span6.offset4
+		.page-header
+			h1=title
 	.row-fluid.span12
 		.span4.well.tall
 			.totals
@@ -54,4 +58,12 @@ div
 		.span6.center.well
 			#title(style="height:50px;")
 			#chart
-
+	.row-fluid
+		.span3
+			div.addthis_toolbox.addthis_default_style
+				a.addthis_button_preferred_1
+				a.addthis_button_preferred_2
+				a.addthis_button_preferred_3
+				a.addthis_button_preferred_4
+				a.addthis_button_compact
+				a.addthis_counter.addthis_bubble_style
