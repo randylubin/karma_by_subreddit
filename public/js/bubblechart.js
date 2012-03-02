@@ -11,7 +11,8 @@ $(document).ready(function() {
 	    .attr("width", r)
 	    .attr("height", r)
 	    .attr("class", "bubble");
-	    
+	
+	var minRadius = 30;   
 
 	var runJSON = function(userinfoObject) {
 	  var node = vis.selectAll("g.node")
@@ -32,8 +33,7 @@ $(document).ready(function() {
 	      .style("overflow", "hidden")
 	      .on("mouseover", animateFirstStep)
           .on("mouseout", animateSecondStep);
-	      
-      if (Number(node.title) >= 5)  {  
+
 		  node.append("text")
 		      .attr("text-anchor", "middle")
 		      .attr("y", ".3em")
@@ -45,15 +45,33 @@ $(document).ready(function() {
 		      .attr("y", "15px")	      
 		      .style("overflow", "hidden")
 		      .style("cursor", "default")
-		      .text(function(d) { return Math.round(d.value); });    
-	  };
+		      .text(function(d) { return Math.round(d.value); });
+
+
+		       $('circle')  //get all circles
+		       		.filter(function(index){
+		       			return $(this).attr('r') < minRadius;       
+		       		})   //that have a small radius
+		       		.parent()   //get parent node
+		       		.children('text')  //get related text
+		       		.hide(); //hide them
+		       
+
+		       //find all circles
+		       
+		       //filter by radius size
+
+		       //hide related text 	
+
 	};
 
 	// Returns a flattened hierarchy containing all leaf nodes under the root.
 	//Hover animation methods
+	
+
 	var name = "";
 	function setName(d) {
-		return d.className.substring;
+		//return d.className.substring;
 	};
 
 	function animateFirstStep(){
@@ -61,12 +79,14 @@ $(document).ready(function() {
     	d3.select("#title").append("div")
     	.attr("id", "text")
     	.attr("height", "50px")
-		.text(node.attr("name")).style("font-size", "24px");
-};
+		//.text(node.attr("name")).style("font-size", "24px");
+	};
 
 	function animateSecondStep(){
     	d3.select("#text").remove();
-};
+
+	};
+	
 
 	function classes(root) {
 	  var classes = [];
@@ -81,6 +101,9 @@ $(document).ready(function() {
 	  recurse(null, root);
 	  return {children: classes};
 	}
+
+
+
 	runJSON(karmaObj);
 
 });
