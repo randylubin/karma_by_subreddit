@@ -47,11 +47,12 @@ $(document).ready(function() {
 		      .style("cursor", "default")
 		      .text(function(d) { return Math.round(d.value); });
 
+// Here is where the text is hidden for small circles
 
 		       $('circle')  //get all circles
-		       		.filter(function(index){
-		       			return $(this).attr('r') < minRadius;       
-		       		})   //that have a small radius
+		       		.filter(function(index){  //start filtering
+		       			return $(this).attr('r') < minRadius; // by radius size      
+		       		})   // if small enough, continue
 		       		.parent()   //get parent node
 		       		.children('text')  //get related text
 		       		.hide(); //hide them
@@ -75,7 +76,7 @@ $(document).ready(function() {
     	if( $(this).attr('r') < minRadius ){
     		$(this).parent().children('text').fadeOut('slow');
     	} else {
-    		//probably reverse above changes, if any
+    		// for big bubbles
     	}
 
 	};
