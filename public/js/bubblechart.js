@@ -1,7 +1,7 @@
 $(document).ready(function() { 
 	var r = 480,
 	    format = d3.format(",d"),
-	    fill = d3.scale.category20c();
+	    fill = d3.scale.category20();
 
 	var bubble = d3.layout.pack()
 	    .sort(d3.descending)
@@ -14,7 +14,6 @@ $(document).ready(function() {
 	    
 
 	var runJSON = function(userinfoObject) {
-		console.log("running");
 	  var node = vis.selectAll("g.node")
 	      .data(bubble.nodes(classes(userinfoObject))
 	      .filter(function(d) { return !d.children; }))
@@ -23,48 +22,50 @@ $(document).ready(function() {
 	      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
 	  node.append("title")
-	      .text(function(d) { return d.className + ": " + format(d.value); });
+	      .text(function(d) { return d.value; });
 
 	  node.append("circle")
 	      .attr("r", function(d) { return d.r; })
+	      .attr("name", function(d) { return d.className.substring; })
+	      .attr("size",function(d) { return d.value; })
 	      .style("fill", function(d) { return fill(d.value); })
 	      .style("overflow", "hidden")
 	      .on("mouseover", animateFirstStep)
           .on("mouseout", animateSecondStep);
 	      
+      if (Number(node.title) >= 5)  {  
+		  node.append("text")
+		      .attr("text-anchor", "middle")
+		      .attr("y", ".3em")
+		      .style("cursor", "default")
+		      .text(function(d) { return d.className.substring(0, d.r / 3); });
 
-	  node.append("text")
-	      .attr("text-anchor", "middle")
-	      .attr("y", ".3em")
-	      .style("class", "body")
-	      .text(function(d) { return d.className.substring(0, d.r / 3); });
-
-	  node.append("text")
-	      .attr("text-anchor", "middle")
-	      .attr("y", "15px")	      
-	      .attr("overflow", "hidden")
-	      .text(function(d) { return Math.round(d.value); });    
-
+		  node.append("text")
+		      .attr("text-anchor", "middle")
+		      .attr("y", "15px")	      
+		      .style("overflow", "hidden")
+		      .style("cursor", "default")
+		      .text(function(d) { return Math.round(d.value); });    
+	  };
 	};
 
 	// Returns a flattened hierarchy containing all leaf nodes under the root.
 	//Hover animation methods
-	function animateFirstStep(){
-    	d3.select(this)
-      	.transition()            
-        .delay(0)            
-        .duration(1000)
-        .style("z-index", "999")
-        .attr("r", function(d){return d.r*2;});
+	var name = "";
+	function setName(d) {
+		return d.className.substring;
+	};
 
+	function animateFirstStep(){
+		name= setName()
+    	d3.select("#title").append("div")
+    	.attr("id", "text")
+    	.attr("height", "50px")
+		.text(node.attr("name")).style("font-size", "24px");
 };
 
 	function animateSecondStep(){
-    	d3.select(this)
-      	.transition()            
-        .delay(0)            
-        .duration(1000)
-        .attr("r", function(d){return d.r;});
+    	d3.select("#text").remove();
 };
 
 	function classes(root) {

@@ -35,7 +35,8 @@ var karmaCalculator = new KarmaCalculator;
 
 app.get('/', function(req, res) {
 		res.render('index', {
-			title: 'Where does your Karma come from?'
+			title: 'Where does your Karma come from?',
+			error: null
 		});
 });
 

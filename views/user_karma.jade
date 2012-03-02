@@ -33,6 +33,7 @@ div
 	.row-fluid.span12
 		.span4.well.tall
 			.totals
+			h3 Links vs. Comments
 				h5 #{links} 
 					span Links with 
 					#{linkVotes} 
@@ -44,10 +45,14 @@ div
 					span votes
 				br
 			.subreddits
+				h3 Subreddits
 				each subreddit in sorted
 					h5 #{subreddit[0]} 
 						span  has 
 						#{subreddit[1]}
 						span  votes	  
 		.span6.center.well
+			#title(style="height:50px;")
 			#chart
+			
+				
