@@ -30,7 +30,7 @@ $(document).ready(function() {
 	      .attr("name", function(d) { return d.className.substring; })
 	      .attr("size",function(d) { return d.value; })
 	      .style("fill", function(d) { return fill(d.value); })
-	      .style("overflow", "hidden")
+	      //.style("overflow", "hidden")
 	      .on("mouseover", animateFirstStep)
           .on("mouseout", animateSecondStep);
 
@@ -38,12 +38,12 @@ $(document).ready(function() {
 		      .attr("text-anchor", "middle")
 		      .attr("y", ".3em")
 		      .style("cursor", "default")
-		      .text(function(d) { return d.className.substring(0, d.r / 3); });
+		      .text(function(d) { return d.className; });
 
 		  node.append("text")
 		      .attr("text-anchor", "middle")
 		      .attr("y", "15px")	      
-		      .style("overflow", "hidden")
+		      //.style("overflow", "hidden")
 		      .style("cursor", "default")
 		      .text(function(d) { return Math.round(d.value); });
 
@@ -55,13 +55,7 @@ $(document).ready(function() {
 		       		.parent()   //get parent node
 		       		.children('text')  //get related text
 		       		.hide(); //hide them
-		       
-
-		       //find all circles
-		       
-		       //filter by radius size
-
-		       //hide related text 	
+		      
 
 	};
 
@@ -69,21 +63,20 @@ $(document).ready(function() {
 	//Hover animation methods
 	
 
-	var name = "";
-	function setName(d) {
-		//return d.className.substring;
-	};
-
 	function animateFirstStep(){
-		name= setName()
-    	d3.select("#title").append("div")
-    	.attr("id", "text")
-    	.attr("height", "50px")
-		//.text(node.attr("name")).style("font-size", "24px");
+		if( $(this).attr('r') < minRadius ){
+			$(this).parent().children('text').show();  //small bubbles
+		}else{
+			//action for big bubbles
+		}
 	};
 
 	function animateSecondStep(){
-    	d3.select("#text").remove();
+    	if( $(this).attr('r') < minRadius ){
+    		$(this).parent().children('text').fadeOut('slow');
+    	} else {
+    		//probably reverse above changes, if any
+    	}
 
 	};
 	
