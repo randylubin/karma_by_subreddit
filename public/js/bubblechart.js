@@ -12,7 +12,7 @@ $(document).ready(function() {
 	    .attr("height", r)
 	    .attr("class", "bubble");
 	
-	var minRadius = 30;   
+	var minRadius = 20;   
 
 	var runJSON = function(userinfoObject) {
 	  var node = vis.selectAll("g.node")
@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 	  node.append("circle")
 	      .attr("r", function(d) { return d.r; })
-	      .attr("name", function(d) { return d.className.substring; })
+	      .attr("name", function(d) { return d.className; })
 	      .attr("size",function(d) { return d.value; })
 	      .style("fill", function(d) { return fill(d.value); })
 	      //.style("overflow", "hidden")
@@ -65,20 +65,18 @@ $(document).ready(function() {
 	
 
 	function animateFirstStep(){
-		if( $(this).attr('r') < minRadius ){
-			$(this).parent().children('text').show();  //small bubbles
-		}else{
+		name = $(this).attr('name')
+		size = $(this).attr('size')
+		d3.select('#title').append("div")
+			.attr("id", "text")
+			.attr("height", "50px")
+			.text(name + ' has '+ size + ' votes.').style("font-size", "24px");
 			//action for big bubbles
-		}
+	
 	};
 
 	function animateSecondStep(){
-    	if( $(this).attr('r') < minRadius ){
-    		$(this).parent().children('text').fadeOut('slow');
-    	} else {
-    		// for big bubbles
-    	}
-
+    	d3.select("#text").remove();
 	};
 	
 
