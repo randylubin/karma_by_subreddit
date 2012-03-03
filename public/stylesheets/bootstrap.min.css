@@ -1,3 +1,7 @@
+.furley{
+	background-image: url("/img/furley_bg.png");
+	background-repeat: repeat;
+}
 .center{text-align:center;}
 .aligncenter4{padding-left:32%;}
 .aligncenter8{padding-left:14%;}
