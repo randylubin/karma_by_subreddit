@@ -4,10 +4,6 @@
 .aligncenter12{padding-left:5%;}
 .strike {text-decoration:line-through;}
 .tall{height:480px;overflow: scroll;}
-body{
-background-image: url("/img/furley_bg.png");
-background-repeat: repeat;
-}
 brick,article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block;}
 audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}
 audio:not([controls]){display:none;}
