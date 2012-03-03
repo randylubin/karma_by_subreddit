@@ -68,6 +68,7 @@ $(document).ready(function() {
 	function animateFirstStep(){
 		name = $(this).attr('name')
 		size = $(this).attr('size')
+		$("#titleprompt").hide();
 		d3.select('#title').append("div")
 			.attr("id", "text")
 			.attr("height", "50px")
