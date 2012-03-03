@@ -35,35 +35,19 @@ div
 		.page-header
 			h1=title
 	.row-fluid.span12
-		.span4.well.tall
+		.span4.well
 			.totals
 			h3 Links vs. Comments
-				h5 #{links} 
-					span Links with 
-					#{linkVotes} 
-					span votes
-					br
-					#{comments} 
-					span Links with 
-					#{commentVotes}
-					span votes
-				br
+				h5 #{links} Links with #{linkVotes} votes
+				h5 #{comments} Comments with #{commentVotes} votes
 			.subreddits
 				h3 Subreddits
 				each subreddit in sorted
-					h5 #{subreddit[0]} 
-						span  has 
-						#{subreddit[1]}
-						span  votes	  
+					h5 #{subreddit[0]} has #{subreddit[1]} votes	  
 		.span6.center.well
 			#title(style="height:50px;")
 			#chart
+			p.small -from your last 100 links/comments-
 	.row-fluid
 		.span3
-			div.addthis_toolbox.addthis_default_style
-				a.addthis_button_preferred_1
-				a.addthis_button_preferred_2
-				a.addthis_button_preferred_3
-				a.addthis_button_preferred_4
-				a.addthis_button_compact
-				a.addthis_counter.addthis_bubble_style
+

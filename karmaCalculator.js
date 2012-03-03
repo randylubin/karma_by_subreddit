@@ -63,7 +63,7 @@ function bigloop(count, after, username, userinfo, newpage, callback){
 					return;
 				}
 			}else{
-				error = 'username does not exist'
+				error = 'username'
 				callback(error)
 				return;
 			}

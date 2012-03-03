@@ -1,6 +1,9 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  background-image: url("/images/orangeback.gif");
+  background-repeat: repeat;
 }
 
 a {

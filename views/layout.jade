@@ -9,25 +9,23 @@ html
 		script(type='text/javascript', src='/js/bubblechart.js')
 		script(type='text/javascript', src='/js/bootstrap.min.js')
 		script(type='text/javascript', src='/js/ga.js')
-	header
-			.navbar.navbar
-				.navbar-inner
-					.container
-							ul.nav
-								a.brand(href='/') KarmaWhoring
-								li: a(href='/') home 
-								li.divider-vertical
-								li: a(href='/about/') about
-		
-.row-fluid
-	.span12						
-		!= body
-	.row-fluid
-		.span12.center
-			small created by 
-			a(href='http://randylubin.com') Randy
-			\ and 
-			a(href='http://chrismaury.com') Chris
+	body
+		.navbar.navbar
+			.navbar-inner
+				.container
+						ul.nav
+							a.brand(href='/') KarmaWhoring
+							li: a(href='/') home 
+							li.divider-vertical
+							li: a(href='/about/') about
 			
-
-			
+		.row-fluid
+			.span12						
+				!= body
+		.row-fluid
+			.span12.center
+				small created by 
+				a(href='http://randylubin.com') Randy
+				\ and 
+				a(href='http://chrismaury.com') Chris
+								

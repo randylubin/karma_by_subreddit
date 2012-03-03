@@ -73,7 +73,11 @@ app.post('/user/',function(req, res) {
 app.get('/user/:username', function(req, res) {
 	karmaCalculator.getObj(req.params.username, function(error, username, userinfoObject, info){
 		if(error){
-			res.redirect('/error/')
+			if (error = 'username'){
+				res.redirect('/user/error/');
+			}else{
+				res.redirect('/error/');
+			}
 		}else{
 			res.expose(userinfoObject)
 			res.render('user_karma.jade',
