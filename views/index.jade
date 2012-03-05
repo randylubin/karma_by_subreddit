@@ -3,8 +3,8 @@
 		.page-header.center
 			h1=title
 
-.row-fluid.span4.aligncenter12
-	.span4.center.well.furley(style="margin-top:5%;")
+.row-fluid.span6.aligncenter6
+	.span4.center.well.furley
 		div
 			if (error != null)	
 				.alert.alert-error
@@ -15,7 +15,6 @@
 				input(class="span3", type="text", name="username", id="username", placeholder="Enter Reddit username...")
 				div(style="margin-top:5px;")
 					input#modal(class="btn-primary", type="submit", value="Submit")
-	.span4.well.furley(style="margin-left:40px")
 		img(src="/img/sample.gif")
 
 //
