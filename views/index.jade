@@ -3,14 +3,23 @@
 		.page-header.center
 			h1=title
 
-.row-fluid.span4.aligncenter4
-	.span4.center.well.furley
-		if (error != null)	
-			.alert.alert-error
-				.a(data-dismiss='alert').close
-				#{error}		
-		form(method="post", action="/user/")
-			label Find out where your Karma comes from.
-			input(class="span3", type="text", name="username", id="username", placeholder="Enter Reddit username...")
-			div
-				input(class="btn-primary", type="submit", value="Submit")
+.row-fluid.span4.aligncenter12
+	.span4.center.well.furley(style="margin-top:5%;")
+		div
+			if (error != null)	
+				.alert.alert-error
+					.a(data-dismiss='alert').close
+					#{error}		
+			form(method="post", action="/user/")
+				label(style="margin-bottom:10px;") Find out where your Karma comes from.
+				input(class="span3", type="text", name="username", id="username", placeholder="Enter Reddit username...")
+				div(style="margin-top:5px;")
+					input#modal(class="btn-primary", type="submit", value="Submit")
+	.span4.well.furley(style="margin-left:40px")
+		img(src="/img/sample.gif")
+
+//
+	div.modal#myModal
+		.modal-body
+			p Fetching Your Karma...
+			p Wait a sec.

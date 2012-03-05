@@ -101,6 +101,8 @@ $(document).ready(function() {
 
 	runJSON(karmaObj);
 
+	//$("#modal").onclick()
+
 });
 
 
