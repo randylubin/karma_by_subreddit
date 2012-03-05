@@ -5,7 +5,7 @@
 
 .row-fluid.span6.aligncenter6
 	.span4.center.well.furley
-		div
+		div(style="border-bottom:2px solid grey;")
 			if (error != null)	
 				.alert.alert-error
 					.a(data-dismiss='alert').close
@@ -15,6 +15,7 @@
 				input(class="span3", type="text", name="username", id="username", placeholder="Enter Reddit username...")
 				div(style="margin-top:5px;")
 					input#modal(class="btn-primary", type="submit", value="Submit")
+		
 		img(src="/img/sample.gif")
 
 //
