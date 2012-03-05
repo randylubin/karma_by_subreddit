@@ -22,8 +22,8 @@ $(document).ready(function() {
 	      .attr("class", "node")
 	      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-	  node.append("title")
-	      .text(function(d) { return d.value; });
+	  //node.append("title")
+	      //.text(function(d) { return d.value; });
 
 	  node.append("circle")
 	      .attr("r", function(d) { return d.r; })
@@ -68,6 +68,7 @@ $(document).ready(function() {
 	function animateFirstStep(){
 		name = $(this).attr('name')
 		size = $(this).attr('size')
+		//d3.select(this).style("border", "px solid black")
 		$("#titleprompt").hide();
 		d3.select('#title').append("div")
 			.attr("id", "text")

@@ -31,9 +31,9 @@ div
 
 .container-fluid.center
 	.row-fluid
-	.span6.offset4
-		.page-header
-			h1=title
+		.span6.aligncenter6
+			.page-header
+				h1=title
 	.row-fluid.span12
 		.span4.well
 			.totals
@@ -50,5 +50,13 @@ div
 			#chart
 			p.small -from your last 100 links/comments-
 	.row-fluid
-		.span3
+		.span3(style="padding-left:80%;")
+			div.addthis_toolbox.addthis_default_style.addthis_32x32_style
+				a(class="addthis_button_preferred_1")
+				a(class="addthis_button_preferred_2")
+				a(class="addthis_button_preferred_3")
+				a(class="addthis_button_preferred_4")
+				a(class="addthis_button_compact")
+			script(type="text/javascript", src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f513e244e74a41a")
+
 
