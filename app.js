@@ -89,8 +89,9 @@ app.get('/user/:username', function(req, res) {
 			res.expose(userinfoObject)
 			res.render('user_karma.jade',
 				{ locals: {
-					title: 'Results for ' + username,
-					info: info
+					title: "My Reddit Karma, By Subreddit",
+					info: info,
+					username: username
 				}				
 			});
 		}
