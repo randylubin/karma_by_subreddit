@@ -53,6 +53,13 @@ app.get('/error', function(req, res) {
 		});
 });
 
+app.get('/user', function(req, res) {
+		res.render('index', {
+			title: 'Where does your Karma come from?',
+			error: null
+		});
+});
+
 app.get('/user/error', function(req, res) {
 		res.render('index', {
 			title: 'Where does your Karma come from?',

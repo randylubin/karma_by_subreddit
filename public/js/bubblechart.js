@@ -99,7 +99,7 @@ $(document).ready(function() {
 
 
 
-	runJSON(karmaObj);
+	if (karmaObj) runJSON(karmaObj);
 
 	//$("#modal").onclick()
 
