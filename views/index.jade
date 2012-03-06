@@ -11,15 +11,17 @@
 					.alert.alert-error
 						.a(data-dismiss='alert').close
 						#{error}		
-				form(method="post", action="/user/")
+				form(method="post", action="/user/", autocomplete="off")
 					label(style="margin-bottom:10px;") Find out where your Karma comes from.
 					input(class="span3", type="text", name="username", id="username", placeholder="Enter Reddit username...")
 					div(style="margin-top:5px;")
-						input.subbut.btn(class="btn-primary", type="submit", data-loading-text="Loading Karma...")
+						input.subbut.btn(class="btn-primary", type="submit", value="Submit", data-loading-text="Loading Karma...", autocomplete="off")
 			
 			img(src="/img/sample.gif")
 
 script
 	var karmaObj = null;
 	$('.tabs').button();
+	$(document).ready('bootstrap_buttons', function() {
+		$('.subbut').button('reset');});
 	$('.subbut').click(function(){ $('.subbut').button('loading');})
