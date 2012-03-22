@@ -1,5 +1,5 @@
-Karma By Subreddit
-==================
+Karma By Subreddit!
+===================
 
 A demo version should be up [here](http://karma.nodester.com)
 
