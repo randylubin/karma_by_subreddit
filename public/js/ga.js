@@ -1,5 +1,6 @@
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-3878446-9']);
+  _gaq.push(['_setAccount', 'UA-21059307-1']);
+  _gaq.push(['_setDomainName', 'randylubin.com']);
   _gaq.push(['_trackPageview']);
 
   (function() {
